@@ -1,6 +1,9 @@
-__pycache__/
-*.pyc
 
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook
 .ipynb_checkpoints/
 
 # Dataset
@@ -12,12 +15,21 @@ data/demo/
 # Trained models
 outputs/models/
 
-# Virtual environment
+# Virtual environments
+.venv/
 venv/
+
+# Environment variables
 .env
+.env.*
 
 # VS Code
 .vscode/
 
 # OS files
 .DS_Store
+Thumbs.db
+
+# Compressed archives
+*.rar
+*.zip

@@ -1,8 +1,8 @@
 import os
 import pandas as pd
 
-data = "..\\data\\raw\\cicids2017_500k.csv"
-data_output = "..\\data\\demo"
+data = r"D:\Python313\Bảo mật ứng dụng hệ thống\BTL_Bao_mat_ung_dung_he_thong\data\raw\cicids2017_500k.csv"
+data_output = r"D:\Python313\Bảo mật ứng dụng hệ thống\BTL_Bao_mat_ung_dung_he_thong\data\output"
 
 os.makedirs(data_output, exist_ok=True)
 
@@ -10,26 +10,21 @@ benign_sp = []
 attack_sp = []
 
 
-for x in pd.read_csv(data):
-    x.columns = x.columns.str.strip()
+df = pd.read_csv(data)
+df.columns = df.columns.str.strip()
 
-    benign = x[x["Label"] == "BENIGN"]
-    attack = x[x["Label"] != "BENIGN"]
+benign = df[df["Label"] == "BENIGN"]
+attack = df[df["Label"] != "BENIGN"]
 
-    if len(benign) > 0:
-        benign_sp.append(benign.sample(
-            n=min(100, len(benign)),
-            random_state=42
-        ))
+benign_df = benign.sample(
+    n=min(600, len(benign)),
+    random_state=42
+)
 
-    if len(attack) > 0:
-        attack_sp.append(attack.sample(
-            n=min(100, len(attack)),
-            random_state=42
-        ))
-
-benign_df = pd.concat(benign_sp, ignore_index=True)
-attack_df = pd.concat(attack_sp, ignore_index=True)
+attack_df = attack.sample(
+    n=min(600, len(attack)),
+    random_state=42
+)
 
 demo_benign = benign_df.sample(n=300, random_state=42)
 demo_attack = attack_df.sample(n=300, random_state=42)
